@@ -157,7 +157,7 @@ class NotificacionesScreen extends ConsumerWidget {
                           .eliminar(notificacion.id);
                     }
                   },
-                ),
+                );
               },
             ),
     );

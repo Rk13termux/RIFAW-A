@@ -25,7 +25,7 @@ class BoletoCard extends StatelessWidget {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: AppTheme.getBoletoColor(boleto.estado).withOpacity(0.2),
+                color: AppTheme.getBoletoColor(boleto.estado).withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: AppTheme.getBoletoColor(boleto.estado),

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '../services/supabase_client.dart';
 import '../data/repositories/chat_repository.dart';

@@ -53,7 +53,7 @@ class _GridNumerosScreenState extends ConsumerState<GridNumerosScreen> {
             data: (rifa) => rifa != null
                 ? Container(
                     width: double.infinity,
-                    color: AppTheme.primaryColor.withOpacity(0.1),
+                    color: AppTheme.primaryColor.withValues(alpha: 0.1),
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       children: [
@@ -163,7 +163,7 @@ class _GridNumerosScreenState extends ConsumerState<GridNumerosScreen> {
       borderRadius: BorderRadius.circular(8),
       child: Container(
         decoration: BoxDecoration(
-          color: color.withOpacity(0.2),
+          color: color.withValues(alpha: 0.2),
           border: Border.all(color: color, width: 2),
           borderRadius: BorderRadius.circular(8),
         ),
@@ -200,7 +200,7 @@ class _GridNumerosScreenState extends ConsumerState<GridNumerosScreen> {
           width: 16,
           height: 16,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.3),
+            color: color.withValues(alpha: 0.3),
             border: Border.all(color: color, width: 2),
             borderRadius: BorderRadius.circular(4),
           ),
@@ -279,7 +279,7 @@ class _GridNumerosScreenState extends ConsumerState<GridNumerosScreen> {
           width: 24,
           height: 24,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.3),
+            color: color.withValues(alpha: 0.3),
             border: Border.all(color: color, width: 2),
             borderRadius: BorderRadius.circular(4),
           ),
@@ -331,7 +331,7 @@ class _GridNumerosScreenState extends ConsumerState<GridNumerosScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppTheme.primaryColor.withOpacity(0.1),
+                  color: AppTheme.primaryColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(

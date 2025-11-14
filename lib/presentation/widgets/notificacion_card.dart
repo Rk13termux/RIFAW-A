@@ -29,7 +29,7 @@ class NotificacionCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: _getTipoColor(notificacion.tipo).withOpacity(0.2),
+                  color: _getTipoColor(notificacion.tipo).withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../screens/home_screen.dart';
-import '../screens/rifa_detail_screen.dart';
-import '../screens/grid_numeros_screen.dart';
-import '../screens/chat_screen.dart';
-import '../screens/mis_boletos_screen.dart';
-import '../screens/notificaciones_screen.dart';
+import '../../presentation/screens/home_screen.dart';
+import '../../presentation/screens/rifa_detail_screen.dart';
+import '../../presentation/screens/grid_numeros_screen.dart';
+import '../../presentation/screens/chat_screen.dart';
+import '../../presentation/screens/mis_boletos_screen.dart';
+import '../../presentation/screens/notificaciones_screen.dart';
 
 final router = GoRouter(
   initialLocation: '/',

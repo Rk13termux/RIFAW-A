@@ -10,7 +10,7 @@ class RifaRepository {
       final response = await _supabase
           .from('rifas')
           .select()
-          .in_('estado', ['activa', 'vendiendo'])
+          .inFilter('estado', ['activa', 'vendiendo'])
           .order('created_at', ascending: false);
 
       return (response as List).map((json) => Rifa.fromJson(json)).toList();

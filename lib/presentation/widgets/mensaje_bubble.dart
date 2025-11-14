@@ -37,7 +37,7 @@ class MensajeBubble extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -115,7 +115,7 @@ class MensajeBubble extends StatelessWidget {
                   DateHelper.formatTime(mensaje.fecha),
                   style: TextStyle(
                     fontSize: 11,
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withValues(alpha: 0.5),
                   ),
                 ),
                 if (isFromMe) ...[

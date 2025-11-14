@@ -1,4 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:typed_data';
 import '../core/constants/app_constants.dart';
 
 class SupabaseClientService {
@@ -65,7 +67,8 @@ class SupabaseClientService {
 
   // Storage helpers
   Future<String> uploadImage(String bucket, String path, List<int> bytes) async {
-    await _client!.storage.from(bucket).uploadBinary(path, bytes);
+    final uint8bytes = Uint8List.fromList(bytes);
+    await _client!.storage.from(bucket).uploadBinary(path, uint8bytes);
     return _client!.storage.from(bucket).getPublicUrl(path);
   }
 
