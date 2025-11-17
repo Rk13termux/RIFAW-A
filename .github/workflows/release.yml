@@ -43,9 +43,6 @@ jobs:
             ### 📱 Descargas disponibles:
             - **Android APK** (ARM64, ARMv7, x86_64)
             - **iOS IPA** (sin firmar - requiere certificado)
-            - **Windows** (x64)
-            - **macOS** (Universal)
-            - **Linux** (x64)
             - **Web** (archivos estáticos)
             
             ### ✨ Características:
@@ -154,93 +151,8 @@ jobs:
           asset_name: rifaswa-cliente-${{ needs.create-release.outputs.version }}-web.zip
           asset_content_type: application/zip
 
-  build-and-upload-linux:
-    name: Build & Upload Linux
-    needs: create-release
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.35.4'
-          channel: 'stable'
-
-      - name: Enable Linux desktop
-        run: flutter config --enable-linux-desktop
-
-      - name: Get dependencies
-        run: flutter pub get
-
-      - name: Build Linux
-        run: flutter build linux --release
-
-      - name: Create tarball
-        run: |
-          cd build/linux/x64/release/bundle
-          tar -czf rifaswa-cliente-linux-x64.tar.gz *
-          mv rifaswa-cliente-linux-x64.tar.gz ../../../../../
-
-      - name: Upload Linux archive
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: rifaswa-cliente-linux-x64.tar.gz
-          asset_name: rifaswa-cliente-${{ needs.create-release.outputs.version }}-linux-x64.tar.gz
-          asset_content_type: application/gzip
-
-  build-and-upload-windows:
-    name: Build & Upload Windows
-    needs: create-release
-    runs-on: windows-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.35.4'
-          channel: 'stable'
-
-      - name: Enable Windows desktop
-        run: flutter config --enable-windows-desktop
-
-      - name: Get dependencies
-        run: flutter pub get
-
-      - name: Build Windows
-        run: flutter build windows --release
-
-      - name: Create ZIP
-        run: |
-          cd build/windows/x64/runner/Release
-          7z a rifaswa-cliente-windows-x64.zip *
-          move rifaswa-cliente-windows-x64.zip ../../../../../
-
-      - name: Upload Windows archive
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: rifaswa-cliente-windows-x64.zip
-          asset_name: rifaswa-cliente-${{ needs.create-release.outputs.version }}-windows-x64.zip
-          asset_content_type: application/zip
-
-  build-and-upload-macos:
-    name: Build & Upload macOS
+  build-and-upload-ios:
+    name: Build & Upload iOS
     needs: create-release
     runs-on: macos-latest
     
@@ -254,27 +166,26 @@ jobs:
           flutter-version: '3.35.4'
           channel: 'stable'
 
-      - name: Enable macOS desktop
-        run: flutter config --enable-macos-desktop
-
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Build macOS
-        run: flutter build macos --release
+      - name: Build iOS (no codesign)
+        run: flutter build ios --release --no-codesign
 
-      - name: Create ZIP
+      - name: Create IPA archive
         run: |
-          cd build/macos/Build/Products/Release
-          zip -r rifaswa-cliente-macos.zip rifaswa_cliente.app
-          mv rifaswa-cliente-macos.zip ../../../../../
+          cd build/ios/iphoneos
+          mkdir Payload
+          cp -r Runner.app Payload/
+          zip -r rifaswa-cliente-ios.ipa Payload
+          mv rifaswa-cliente-ios.ipa ../../../
 
-      - name: Upload macOS archive
+      - name: Upload iOS archive
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: rifaswa-cliente-macos.zip
-          asset_name: rifaswa-cliente-${{ needs.create-release.outputs.version }}-macos.zip
-          asset_content_type: application/zip
+          asset_path: rifaswa-cliente-ios.ipa
+          asset_name: rifaswa-cliente-${{ needs.create-release.outputs.version }}-ios.ipa
+          asset_content_type: application/octet-stream
